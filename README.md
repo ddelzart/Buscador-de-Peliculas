@@ -1,6 +1,7 @@
 Buscador de Pelis
 
 🎬 Descripción
+
 Aplicación web que permite buscar películas a través de la API de The Movie Database (TMDb), mostrando información como el título, descripción, puntuación y póster de cada película.
 
 🚀 Tecnologías utilizadas
