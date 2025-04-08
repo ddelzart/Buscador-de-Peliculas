@@ -23,7 +23,7 @@ Diseño responsivo
 
 1-Cloná el repositorio:
 
-git clone https://github.com/tu-usuario/buscador-pelis.git
+git clone https://ddelzart.github.io/Buscador-de-Peliculas/
 
 
 2-Abrí el archivo index.html en tu navegador.
