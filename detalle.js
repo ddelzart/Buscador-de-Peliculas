@@ -15,20 +15,50 @@ fetch(`https://www.omdbapi.com/?i=${movieId}&apikey=${apiKey}`)
   function mostrarDetalle(peli) {
     const container = document.getElementById('movie-detail');
     container.innerHTML = `
-      <div class="detalle-card">
+      <div>
         <img src="${peli.Poster !== 'N/A' ? peli.Poster : 'https://via.placeholder.com/300'}" alt="${peli.Title}" />
-        <div class="detalle-info">
+        <div>
           <h2>${peli.Title} (${peli.Year})</h2>
           <p><strong>Género:</strong> ${peli.Genre}</p>
           <p><strong>Director:</strong> ${peli.Director}</p>
           <p><strong>Actores:</strong> ${peli.Actors}</p>
           <p><strong>Duración:</strong> ${peli.Runtime}</p>
           <p><strong>Sinopsis:</strong> ${peli.Plot}</p>
-          <a href="index.html" class="btn-volver">🔙 Volver</a>
+          <button id="fav-btn">❤️ Agregar a Favoritos</button>
+          <br/>
+          <a href="index.html">🔙 Volver</a>
         </div>
       </div>
     `;
+  
+    // Acción del botón
+    document.getElementById('fav-btn').addEventListener('click', () => {
+      agregarAFavoritos(peli);
+    });
   }
+  
+  function agregarAFavoritos(peli) {
+    let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
+  
+    const yaExiste = favoritos.some(fav => fav.imdbID === peli.imdbID);
+    if (!yaExiste) {
+      favoritos.push(peli);
+      localStorage.setItem('favoritos', JSON.stringify(favoritos));
+      Swal.fire({
+        icon: 'success',
+        title: 'Agregada a Favoritos',
+        text: `${peli.Title} fue añadida correctamente.`,
+      });
+    } else {
+      Swal.fire({
+        icon: 'info',
+        title: 'Ya está en Favoritos',
+        text: `${peli.Title} ya estaba guardada.`,
+      });
+    }
+  }
+  
+  
   
     function generarEstrellas(rating) {
         if (isNaN(rating)) return ''; // por si viene mal
